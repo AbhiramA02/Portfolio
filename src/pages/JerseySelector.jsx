@@ -68,49 +68,51 @@ export default function JerseySelector(){
   const favoriteJerseys = JERSEYS.filter((j) => favorites.includes(j.id));
 
   return (
-    <div className="app">
-      <h1 className="title">Throwback Jersey Selector</h1>
-      <div className="main-layout">
-        <div className="jersey-view">
-          <div className="jersey-image-wrapper">
-            <img
-              src={currentJersey.imageURL}
-              alt={`${currentJersey.player} Throwback Jersey`}
-              className="jersey-image"
-            />
+    <div className="page-center">
+      <div className="jersey-card">
+        <h1 className="title">Throwback Jersey Selector</h1>
+        <div className="main-layout">
+          <div className="jersey-view">
+            <div className="jersey-image-wrapper">
+              <img
+                src={currentJersey.imageURL}
+                alt={`${currentJersey.player} Throwback Jersey`}
+                className="jersey-image"
+              />
+              
+              <div className="buttons-row">
+                <button onClick={goLeft}>Left</button>
+                <button
+                  onClick={toggleFavorite}
+                  className={isFavorite ? "favorite active" : "favorite"}
+                >
+                  {isFavorite ? "★ Favorited" : "☆ Favorite"}
+                </button>
+                <button onClick={goRight}>Right</button>
+              </div>
+            </div>
             
-            <div className="buttons-row">
-              <button onClick={goLeft}>Left</button>
-              <button
-                onClick={toggleFavorite}
-                className={isFavorite ? "favorite active" : "favorite"}
-              >
-                {isFavorite ? "★ Favorited" : "☆ Favorite"}
-              </button>
-              <button onClick={goRight}>Right</button>
+            <div className="jersey-info">
+              <h2>{currentJersey.player}</h2>
+              <p><strong>Team:</strong> {currentJersey.team}</p>
+              <p><strong>Year:</strong> {currentJersey.year}</p>
             </div>
           </div>
-          
-          <div className="jersey-info">
-            <h2>{currentJersey.player}</h2>
-            <p><strong>Team:</strong> {currentJersey.team}</p>
-            <p><strong>Year:</strong> {currentJersey.year}</p>
-          </div>
+        </div>
 
-          <div className="favorite-panel">
-            <h3>Your Favorites</h3>
-            {favoriteJerseys.length === 0 ? (
-              <p>No favorites yet. Hit "Favorite" to start your stash.</p>
-            ) : (
-              <ul>
-                {favoriteJerseys.map((jersey) => (
-                  <li key = {jersey.id}>
-                    {jersey.player} ({jersey.team}, {jersey.year})
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+        <div className="favorite-panel">
+          <h3>Your Favorites</h3>
+          {favoriteJerseys.length === 0 ? (
+            <p>No favorites yet. Hit "Favorite" to start your stash.</p>
+          ) : (
+            <ul>
+              {favoriteJerseys.map((jersey) => (
+                <li key = {jersey.id}>
+                  {jersey.player} ({jersey.team}, {jersey.year})
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>

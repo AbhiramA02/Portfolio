@@ -1,6 +1,9 @@
 import {Link} from 'react-router-dom'
+import React from "react";
+import JerseySelector from './pages/JerseySelector.jsx'
+import "./App.css";
 
-function App(){
+export default function App(){
   return(
     <div style = {{padding: '2rem'}}>
       <h1>Abhiram Agina</h1>
@@ -15,5 +18,3 @@ function App(){
     </div>
   )
 }
-
-export default App
