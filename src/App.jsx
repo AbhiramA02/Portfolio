@@ -9,7 +9,7 @@ function App(){
       <h2>Projects</h2>
       <ul>
         <li>
-          <Link to = "/jerseyselector">Randomized Jersey Selector (React)</Link>
+          <Link to = "/jerseyselector">Jersey Selector (React)</Link>
         </li>
       </ul>
     </div>
