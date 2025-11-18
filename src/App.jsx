@@ -10,11 +10,13 @@ export default function App(){
       <p>Software Developer • Python • C++ • JavaScript • React</p>
 
       <h2>Projects</h2>
+      {/*
       <ul>
         <li>
           <Link to = "/jerseyselector">Jersey Selector (React)</Link>
         </li>
       </ul>
+      */}
     </div>
   )
 }
