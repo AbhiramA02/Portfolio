@@ -118,7 +118,45 @@ def api_me():
     return jsonify({"error": "Not logged in"}), 401
   
   res = requests.get(f"{SPOTIFY_API_BASE}/me", headers=headers) #Make a GET request to Spotify's /me endpoint using saved access token
-  return jsonify(res.json(), res.status_code) #Return JSON response from Spotify directly from frontend
+  return jsonify(res.json(), res.status_code) #Return JSON response from Spotify directly to frontend
+
+@app.route("/api/top-artists") #Defines api/top-artists route - used by frontend to get user's Top Artists
+def top_artists():
+  headers = get_auth_header_from_session()
+  if not headers:
+    return jsonify({"error": "Not logged in"}), 401
+  
+  params = {
+    "limit": 5,
+    "time_range": "short_term"
+  }
+
+  res = requests.get( #Make a GET request to Spotify's "Get User's Top Artists" Endpoint
+    f"{SPOTIFY_API_BASE}/me/top/artists",
+    headers=headers,
+    params=params
+  )
+
+  return jsonify(res.json(), res.status_code)
+
+@app.route("/api/top-tracks") #Defines api/top-tracks route - used by frontend to get user's Top Tracks
+def top_tracks():
+  headers = get_auth_header_from_session()
+  if not headers:
+    return jsonify({"error": "Not logged in"}), 401
+  
+  params = {
+    "limit": 10,
+    "time_range": "short_term"
+  }
+
+  res = requests.get( #Make a GET request to Spotify's "Get User's Top Tracks" Endpoint
+    f"{SPOTIFY_API_BASE}/me/top/tracks",
+    headers=headers,
+    params=params
+  )
+
+  return jsonify(res.json(), res.status_code)
 
 if __name__ == "__main__": #Only runs if we execute 'python app.py' directly
   app.run(host="127.0.0.1", port=5000, debug=True) #Starts Flask dev server on localhost:5000 (debug=True auto reloads code for edits)
