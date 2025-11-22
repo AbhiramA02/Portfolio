@@ -7,6 +7,7 @@ The app.py file establishes the backend server that the frontend will call to co
 from flask import Flask, redirect, request, session, jsonify
 from dotenv import load_dotenv
 from urllib.parse import urlencode
+from flask_cors import CORS
 import os
 import secrets
 import base64
@@ -16,6 +17,12 @@ load_dotenv()
 
 app = Flask(__name__) #Creates Flask Application Instance
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret") #Sets Secret Key for Session Signing & Security
+
+CORS(
+    app,
+    supports_credentials=True,
+    origins=["http://127.0.0.1:5173"],
+    )
 
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID") 
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
@@ -103,7 +110,7 @@ def callback():
   session["spotify_user_id"] = user_profile.get("id")
   session["spotify_display_name"] = user_profile.get("display_name")
 
-  return redirect("https://127.0.0.1:3000/dashboard") #After successful login, redirect user to React app's Dashboard
+  return redirect("http://127.0.0.1:5173/") #After successful login, redirect user to React app's Dashboard
 
 def get_auth_header_from_session(): #Helper function that retrieves the saved access token from session
   access_token = session.get("access_token")
@@ -118,7 +125,7 @@ def api_me():
     return jsonify({"error": "Not logged in"}), 401
   
   res = requests.get(f"{SPOTIFY_API_BASE}/me", headers=headers) #Make a GET request to Spotify's /me endpoint using saved access token
-  return jsonify(res.json(), res.status_code) #Return JSON response from Spotify directly to frontend
+  return jsonify(res.json()), res.status_code #Return JSON response from Spotify directly to frontend
 
 @app.route("/api/top-artists") #Defines api/top-artists route - used by frontend to get user's Top Artists
 def top_artists():
@@ -137,7 +144,7 @@ def top_artists():
     params=params
   )
 
-  return jsonify(res.json(), res.status_code)
+  return jsonify(res.json()), res.status_code
 
 @app.route("/api/top-tracks") #Defines api/top-tracks route - used by frontend to get user's Top Tracks
 def top_tracks():
@@ -156,7 +163,7 @@ def top_tracks():
     params=params
   )
 
-  return jsonify(res.json(), res.status_code)
+  return jsonify(res.json()), res.status_code
 
 if __name__ == "__main__": #Only runs if we execute 'python app.py' directly
   app.run(host="127.0.0.1", port=5000, debug=True) #Starts Flask dev server on localhost:5000 (debug=True auto reloads code for edits)
