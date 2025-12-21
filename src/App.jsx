@@ -6,7 +6,7 @@ import "./App.css";
 export default function App(){
   return(
     <div style = {{padding: '2rem'}}>
-      <h1>Abhiram Agina</h1>
+      <h1>Abhiram Agina's Site</h1>
       {/*
       <ul>
         <li>
