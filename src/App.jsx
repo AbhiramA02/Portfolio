@@ -14,6 +14,7 @@ export default function App(){
         </li>
       </ul>
       */}
+      <a href="/ivevents">IVEvents</a>
     </div>
   )
 }
