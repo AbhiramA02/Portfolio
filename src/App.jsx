@@ -14,7 +14,7 @@ export default function App(){
         </li>
       </ul>
       */}
-      <a href="https://ivevents.abhiramagina.xyz">IVEvents</a>
+      <a href="https://ivevents.abhiramagina.xyz">IVEvents - Social Event-Finding App</a>
     </div>
   )
 }
