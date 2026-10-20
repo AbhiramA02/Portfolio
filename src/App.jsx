@@ -6,7 +6,7 @@ import "./App.css";
 export default function App(){
   return(
     <div style = {{padding: '2rem'}}>
-      <h1>Abhiram Agina's Site</h1>
+      <h1>Abhiram Agina - Portfolio</h1>
       {/*
       <ul>
         <li>
@@ -14,7 +14,6 @@ export default function App(){
         </li>
       </ul>
       */}
-      <a href="https://ivevents.abhiramagina.xyz">IVEvents - A Social Events App</a>
     </div>
   )
 }
